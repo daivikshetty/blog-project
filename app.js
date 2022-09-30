@@ -23,7 +23,15 @@ app.get("/register",(req,res) => {
 
 app.post("/",(req,res) => {
       console.log("Up and running...");
-})
+});
+
+app.post("/login",(req,res) => {
+      const credentials = {
+            mailName : req.body.username,
+            password : req.body.password
+      };
+      res.send(credentials);
+});
 
 app.listen(3000,() => {
       console.log("App running on port 3000...");
