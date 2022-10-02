@@ -1,8 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
+const mySql = require('mysql');
 
 const app = express();
+
+var con = mySql.createConnection({
+      host : "localhost",
+      user : "root",
+      password : "@daivik"
+});
+
+con.connect((err) => {
+      if(!err){
+            console.log("Connected!");
+      }
+      else{
+            console.log(err);
+      }
+});
 
 app.use(express.static("views"));
 app.set("view engine","ejs");
