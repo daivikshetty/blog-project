@@ -73,6 +73,18 @@ app.post("/login",(req,res) => {
             mailName : req.body.username,
             password : req.body.password
       };
+
+      var INSERT = "INSERT INTO USERS VALUES('" + credentials.mailName + "','" + credentials.password +"')";
+      // console.log(INSERT);
+      // console.log(credentials);
+      con.query(INSERT, (err, result) => {
+            if(err){
+                  console.log(err);
+            }
+            else{
+                  console.log("Inserted one value");
+            }
+      });
       res.redirect("/login");
 });
 
