@@ -5,7 +5,7 @@ const mySql = require('mysql');
 
 const app = express();
 
-var con = mySql.createConnection({
+var con = mySql.createConnection({              // connect to mySQL server
       host : "localhost",
       user : "root",
       password : "@daivik"
@@ -14,6 +14,34 @@ var con = mySql.createConnection({
 con.connect((err) => {
       if(!err){
             console.log("Connected!");
+
+            var CREATE = "CREATE DATABASE testDB";          //creates testDB database
+            con.query(CREATE, (err,result) => {
+                  if(err){
+                        console.log(err);
+                  }
+                  else{
+                        console.log("Created Database");
+                  }
+            });
+
+            var CONTROL = "USE testDB";         //change to testDB
+            con.query(CONTROL, (err,result) => {
+                  if(err){
+                        console.log(err);
+                  }
+                  else{
+                        console.log("Using testDB");
+                  }
+            })
+
+            var TABLE = "CREATE TABLE USERS(USERNAME VARCHAR(255),PASS VARCHAR(255))";    //create table USERS
+            con.query(TABLE, (err,result) => {
+                  if(err){console.log(err);}
+                  else{
+                        console.log("Created Table");
+                  }
+            })
       }
       else{
             console.log(err);
@@ -45,7 +73,7 @@ app.post("/login",(req,res) => {
             mailName : req.body.username,
             password : req.body.password
       };
-      res.send(credentials);
+      res.redirect("/login");
 });
 
 app.listen(3000,() => {
