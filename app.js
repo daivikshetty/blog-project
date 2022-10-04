@@ -35,7 +35,7 @@ con.connect((err) => {
                   }
             })
 
-            var TABLE = "CREATE TABLE USERS(USERNAME VARCHAR(255),PASS VARCHAR(255))";    //create table USERS
+            var TABLE = "CREATE TABLE USERS(USERNAME VARCHAR(255), EMAIL VARCHAR(255), PASSWORD VARCHAR(255))";    //create table USERS
             con.query(TABLE, (err,result) => {
                   if(err){console.log(err);}
                   else{
@@ -68,13 +68,14 @@ app.post("/",(req,res) => {
       console.log("Up and running...");
 });
 
-app.post("/login",(req,res) => {
+app.post("/register",(req,res) => {
       const credentials = {
-            mailName : req.body.username,
+            userName : req.body.username,
+            mailId : req.body.email,
             password : req.body.password
       };
 
-      var INSERT = "INSERT INTO USERS VALUES('" + credentials.mailName + "','" + credentials.password +"')";
+      var INSERT = "INSERT INTO USERS VALUES('" + credentials.userName + "','" + credentials.mailId + "','" + credentials.password +"')";
       // console.log(INSERT);
       // console.log(credentials);
       con.query(INSERT, (err, result) => {
@@ -85,7 +86,7 @@ app.post("/login",(req,res) => {
                   console.log("Inserted one value");
             }
       });
-      res.redirect("/login");
+      res.redirect("/register");
 });
 
 app.listen(3000,() => {
