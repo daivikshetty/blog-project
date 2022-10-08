@@ -41,7 +41,7 @@ con.connect((err) => {
                   else{
                         console.log("Created Table");
                   }
-            })
+            });
       }
       else{
             console.log(err);
@@ -68,25 +68,36 @@ app.post("/",(req,res) => {
       console.log("Up and running...");
 });
 
+function submitButton(){
+      console.log("Submitted!!!");
+}
+
 app.post("/register",(req,res) => {
       const credentials = {
             userName : req.body.username,
             mailId : req.body.email,
-            password : req.body.password
+            password : req.body.password,
+            confirmPassword : req.body.confirmPassword
       };
 
-      var INSERT = "INSERT INTO USERS VALUES('" + credentials.userName + "','" + credentials.mailId + "','" + credentials.password +"')";
-      // console.log(INSERT);
-      // console.log(credentials);
-      con.query(INSERT, (err, result) => {
-            if(err){
-                  console.log(err);
-            }
-            else{
-                  console.log("Inserted one value");
-            }
-      });
-      res.redirect("/register");
+      if(credentials.password != credentials.confirmPassword){
+            console.log("Wrong password!!!");
+            res.redirect("/");
+      }
+      else{
+            var INSERT = "INSERT INTO USERS VALUES('" + credentials.userName + "','" + credentials.mailId + "','" + credentials.password +"')";
+            // console.log(INSERT);
+            // console.log(credentials);
+            con.query(INSERT, (err, result) => {
+                  if(err){
+                        console.log(err);
+                  }
+                  else{
+                        console.log("Inserted one value");
+                  }
+            });
+            res.redirect("/register");
+      }
 });
 
 app.listen(3000,() => {
