@@ -15,15 +15,15 @@ con.connect((err) => {
       if(!err){
             console.log("Connected!");
 
-            var CREATE = "CREATE DATABASE testDB";          //creates testDB database
-            con.query(CREATE, (err,result) => {
-                  if(err){
-                        console.log(err);
-                  }
-                  else{
-                        console.log("Created Database");
-                  }
-            });
+            // var CREATE = "CREATE DATABASE testDB";          //creates testDB database
+            // con.query(CREATE, (err,result) => {
+            //       if(err){
+            //             console.log(err);
+            //       }
+            //       else{
+            //             console.log("Created Database");
+            //       }
+            // });
 
             var CONTROL = "USE testDB";         //change to testDB
             con.query(CONTROL, (err,result) => {
@@ -35,13 +35,13 @@ con.connect((err) => {
                   }
             })
 
-            var TABLE = "CREATE TABLE USERS(USERNAME VARCHAR(255), EMAIL VARCHAR(255), PASSWORD VARCHAR(255))";    //create table USERS
-            con.query(TABLE, (err,result) => {
-                  if(err){console.log(err);}
-                  else{
-                        console.log("Created Table");
-                  }
-            });
+            // var TABLE = "CREATE TABLE USERS(USERNAME VARCHAR(255), EMAIL VARCHAR(255), PASSWORD VARCHAR(255))";    //create table USERS
+            // con.query(TABLE, (err,result) => {
+            //       if(err){console.log(err);}
+            //       else{
+            //             console.log("Created Table");
+            //       }
+            // });
       }
       else{
             console.log(err);
@@ -71,6 +71,22 @@ app.post("/",(req,res) => {
 function submitButton(){
       console.log("Submitted!!!");
 }
+
+app.post("/login",(req,res) => {
+      const details = {
+            userNameOrMail : req.body.username,
+            password : req.body.password
+      };
+
+      const QUERRY = "SELECT * FROM users;";
+
+      con.query(QUERRY, (err, result) => {
+            if(err){
+                  console.log(err);
+            }
+      });
+      res.redirect("/login");
+});
 
 app.post("/register",(req,res) => {
       const credentials = {
