@@ -41,13 +41,40 @@ function submitButton(){
 
 app.post("/login",(req,res) => {
       const details = {
-            userNameOrMail : req.body.username,
+            userName : req.body.username,
+            userMail : req.body.username,
             password : req.body.password
       };
 
       console.log(details);
 
-      //insert object here
+      User.find({$or:
+            [     
+                  {username : details.userName},
+                  {email : details.userMail}
+            ]},
+            (err,foundUser2) => {
+                  if(!err){
+                        if(foundUser2 === 0){
+                              console.log("Username or Email doesn't exist");
+                              res.redirect("/login");
+                        }
+                        else{
+                              console.log(foundUser2);
+                              if(foundUser2.password === details.password){
+                                    console.log("Correct password :)");
+                              }
+                              else{
+                                    console.log("Incorrect password!!!");
+                                    console.log(foundUser2.password);
+                                    console.log(details.password);
+                              }
+                        }
+                  }
+            else{
+                  console.log(err);
+            }
+      });
 
 
       res.redirect("/login");
@@ -61,22 +88,27 @@ app.post("/register",(req,res) => {
             confirmPassword : req.body.confirmPassword
       };
 
-      User.find({$or: [{username : credentials.userName}, {email : credentials.mailId}]},(err,foundUser2) => {
-            if(!err){
-                  if(foundUser2.length!=0){
-                        console.log("Exists!!!");
-                        res.redirect("/register");
+      User.find({$or:
+            [
+                  {username : credentials.userName},
+                  {email : credentials.mailId}
+            ]},
+            (err,foundUser2) => {
+                  if(!err){
+                        if(foundUser2.length!=0){
+                              console.log("Exists!!!");
+                              res.redirect("/register");
+                        }
+                        else{
+                              console.log("Saving...");
+                              const newUser = new User({username:credentials.userName,email:credentials.mailId,password:credentials.password});
+                              newUser.save();
+                              res.redirect("/register");
+                        }
                   }
                   else{
-                        console.log("Saving...");
-                        const newUser = new User({username:credentials.userName,email:credentials.mailId,password:credentials.password});
-                        newUser.save();
-                        res.redirect("/register");
+                        console.log(err);
                   }
-            }
-            else{
-                  console.log(err);
-            }
       });
 });
 
