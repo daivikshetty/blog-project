@@ -60,12 +60,24 @@ app.post("/register",(req,res) => {
             password : req.body.password,
             confirmPassword : req.body.confirmPassword
       };
-      console.log(credentials);
 
-      const newUser = new User({username:credentials.userName,email:credentials.mailId,password:credentials.password});
-      newUser.save();
-
-      res.redirect("/register");
+      User.find({$or: [{username : credentials.userName}, {email : credentials.mailId}]},(err,foundUser2) => {
+            if(!err){
+                  if(foundUser2.length!=0){
+                        console.log("Exists!!!");
+                        res.redirect("/register");
+                  }
+                  else{
+                        console.log("Saving...");
+                        const newUser = new User({username:credentials.userName,email:credentials.mailId,password:credentials.password});
+                        newUser.save();
+                        res.redirect("/register");
+                  }
+            }
+            else{
+                  console.log(err);
+            }
+      });
 });
 
 app.listen(3000,() => {
