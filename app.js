@@ -88,28 +88,34 @@ app.post("/register",(req,res) => {
             confirmPassword : req.body.confirmPassword
       };
 
-      User.find({$or:
-            [
-                  {username : credentials.userName},
-                  {email : credentials.mailId}
-            ]},
-            (err,foundUser2) => {
-                  if(!err){
-                        if(foundUser2.length!=0){
-                              console.log("Exists!!!");
-                              res.redirect("/register");
+      if(credentials.password === credentials.confirmPassword){
+            User.find({$or:
+                  [
+                        {username : credentials.userName},
+                        {email : credentials.mailId}
+                  ]},
+                  (err,foundUser2) => {
+                        if(!err){
+                              if(foundUser2.length!=0){
+                                    console.log("Exists!!!");
+                                    res.redirect("/register");
+                              }
+                              else{
+                                    console.log("Saving...");
+                                    const newUser = new User({username:credentials.userName,email:credentials.mailId,password:credentials.password});
+                                    newUser.save();
+                                    res.redirect("/register");
+                              }
                         }
                         else{
-                              console.log("Saving...");
-                              const newUser = new User({username:credentials.userName,email:credentials.mailId,password:credentials.password});
-                              newUser.save();
-                              res.redirect("/register");
+                              console.log(err);
                         }
-                  }
-                  else{
-                        console.log(err);
-                  }
-      });
+            });
+      }
+      else{
+            console.log("Enter passwords again!!!");
+            res.redirect("/register");
+      }
 });
 
 app.listen(3000,() => {
