@@ -55,19 +55,16 @@ app.post("/login",(req,res) => {
             ]},
             (err,foundUser2) => {
                   if(!err){
-                        if(foundUser2 === 0){
+                        if(foundUser2.length === 0){
                               console.log("Username or Email doesn't exist");
-                              res.redirect("/login");
                         }
                         else{
-                              console.log(foundUser2);
-                              if(foundUser2.password === details.password){
+                              console.log(foundUser2[0]);
+                              if(foundUser2[0].password === details.password){
                                     console.log("Correct password :)");
                               }
                               else{
                                     console.log("Incorrect password!!!");
-                                    console.log(foundUser2.password);
-                                    console.log(details.password);
                               }
                         }
                   }
