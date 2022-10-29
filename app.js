@@ -15,11 +15,11 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("User", userSchema);
 
 const app = express();
-// app.use(express.static(__dirname + '/public'));
-app.use(express.static("views"));
-app.set("view engine","ejs");
 
+app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static(__dirname + "\public")); 
+
 
 app.get("/",(req,res) => {
       res.render("home");
@@ -37,9 +37,13 @@ app.get("/register",(req,res) => {
       res.render("register");
 });
 
+
+
 app.post("/",(req,res) => {
       console.log("Up and running...");
 });
+
+let tempObj;
 
 app.post("/login",(req,res) => {
       const details = {
@@ -64,9 +68,19 @@ app.post("/login",(req,res) => {
                               // console.log(foundUser2[0]);
                               if(foundUser2[0].password === details.password){
                                     console.log("Log in was successful!");
+
+                                    app.get("/profile", (req,res) => {        //can't access /profile unless logged in
+                                          res.render("profile",{
+                                                userName : foundUser2[0].username,
+                                                mail : foundUser2[0].email
+                                          });
+                                    });
+
+                                    res.redirect("/profile");
                               }
                               else{
                                     console.log("Incorrect password!!!");
+                                    res.redirect("/login");
                               }
                         }
                   }
@@ -75,8 +89,6 @@ app.post("/login",(req,res) => {
             }
       });
 
-
-      res.redirect("/login");
 });
 
 // app.post('/login', 
