@@ -24,6 +24,25 @@ app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "\public")); 
 
+function renderProfilePage(searchUserName){
+      console.log(searchUserName);
+      app.get("/profile", (req,res) => {        //can't access /profile unless logged in
+            User.find({username : searchUserName}, (err, foundUser4) => {
+                  if(err){
+                        console.log(err);
+                  }
+                  else{
+                        console.log(foundUser4[0]);
+                        res.render("profile",
+                        {
+                              userName : foundUser4[0].username,
+                              mail : foundUser4[0].email
+                        });
+                  }
+            });
+      });
+}
+
 
 app.get("/",(req,res) => {
       res.render("home");
@@ -124,22 +143,9 @@ app.post("/register",(req,res) => {
                                     console.log("Account created!!");
                                     const newUser = new User({username:credentials.userName,email:credentials.mailId,password:credentials.password});
                                     newUser.save();
-                                    
-                                    app.get("/profile", (req,res) => {        //can't access /profile unless logged in
-                                          User.find({username : credentials.userName}, (err, foundUser3) => {
-                                                if(err){
-                                                      console.log(err);
-                                                }
-                                                else{
-                                                      // console.log(foundUser3);
-                                                      res.render("profile",
-                                                      {
-                                                            userName : foundUser3[0].username,
-                                                            mail : foundUser3[0].email
-                                                      });
-                                                }
-                                          });
-                                    });
+
+                                    const searchName = credentials.userName;
+                                    renderProfilePage(searchName);
                                     res.redirect("/profile");
                               }
                         }
@@ -158,6 +164,10 @@ app.post("/register",(req,res) => {
 //       const userPage = req.params.userPage;
 //       console.log(userPage);
 // });
+
+app.post("/profile", (req, res) => {
+      console.log(req.body);
+});
 
 app.listen(3000,() => {
       console.log("App running on port 3000...");

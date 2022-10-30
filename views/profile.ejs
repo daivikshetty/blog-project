@@ -7,8 +7,29 @@
       <title>Blogspot</title>
 </head>
 <body>
-      <h1>User Profile</h1>
-      <h3>Username : <%= userName%></h3>
-      <h3>Email : <%= mail%></h3>
+      <div class="info">
+            <h1>User Profile</h1>
+            <h3>Username : <%= userName%></h3>
+            <h3>Email : <%= mail%></h3>
+      </div>
+      <div class="blogs">
+            <h2>My Blogs</h2>
+      </div>
+      <div class="input">
+            <h2>Write New Blog</h2>
+            <form method="post">
+                  <div>
+                        <input type="text" name="blogTitle" placeholder="Title" required>
+                  </div>
+                  <div>
+                        <input type="text" name="blogContent" placeholder="Content" style="width: 500px;height: 50px;" required>
+                  </div>
+                  <div>
+                        <input type="submit" value="Submit">
+                  </div>
+            </form>
+            
+      </div>
+
 </body>
 </html>
