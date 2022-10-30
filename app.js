@@ -9,7 +9,11 @@ mongoose.connect('mongodb://localhost:27017/test');
 const userSchema = new mongoose.Schema({
       username : String,
       email : String,
-      password : String
+      password : String,
+      blogs : [{
+            title : String,
+            content : String
+      }]
 });                                             //create schema
 
 const User = mongoose.model("User", userSchema);
@@ -36,8 +40,6 @@ app.get("/login",(req,res) => {
 app.get("/register",(req,res) => {
       res.render("register");
 });
-
-
 
 app.post("/",(req,res) => {
       console.log("Up and running...");
@@ -119,10 +121,26 @@ app.post("/register",(req,res) => {
                                     res.redirect("/register");
                               }
                               else{
-                                    console.log("Saving...");
+                                    console.log("Account created!!");
                                     const newUser = new User({username:credentials.userName,email:credentials.mailId,password:credentials.password});
                                     newUser.save();
-                                    res.redirect("/register");
+                                    
+                                    app.get("/profile", (req,res) => {        //can't access /profile unless logged in
+                                          User.find({username : credentials.userName}, (err, foundUser3) => {
+                                                if(err){
+                                                      console.log(err);
+                                                }
+                                                else{
+                                                      // console.log(foundUser3);
+                                                      res.render("profile",
+                                                      {
+                                                            userName : foundUser3[0].username,
+                                                            mail : foundUser3[0].email
+                                                      });
+                                                }
+                                          });
+                                    });
+                                    res.redirect("/profile");
                               }
                         }
                         else{
