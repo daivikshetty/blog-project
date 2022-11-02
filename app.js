@@ -64,7 +64,7 @@ app.post("/",(req,res) => {
       console.log("Up and running...");
 });
 
-let tempObj;
+var tempObj;
 
 app.post("/login",(req,res) => {
       const details = {
@@ -87,6 +87,7 @@ app.post("/login",(req,res) => {
                         }
                         else{
                               // console.log(foundUser2[0]);
+                              tempObj = foundUser2[0];
                               if(foundUser2[0].password === details.password){
                                     console.log("Log in was successful!");
 
@@ -111,13 +112,6 @@ app.post("/login",(req,res) => {
       });
 
 });
-
-// app.post('/login', 
-//   passport.authenticate('local', { failureRedirect: '/login' }),
-//   function(req, res) {
-//       console.log("Login successful!!!");
-//       res.redirect('/login');
-//   });
 
 app.post("/register",(req,res) => {
       const credentials = {
@@ -160,13 +154,39 @@ app.post("/register",(req,res) => {
       }
 });
 
-// app.get("/:userPage", function(req, res){
-//       const userPage = req.params.userPage;
-//       console.log(userPage);
-// });
-
 app.post("/profile", (req, res) => {
-      console.log(req.body);
+      const newBlog = {
+            title : req.body.blogTitle,
+            content : req.body.blogContent
+      }
+
+      var prevBlogs;
+
+      console.log("tempObj", tempObj);
+
+      User.find({username : tempObj.username}, (err, foundUser5) => {
+            if(err){
+                  console.log(err);
+            }
+            else{
+                  // console.log("newBlog = ", newBlog);
+                  console.log("foundUser5 = ", foundUser5[0]);
+                  prevBlogs = foundUser5[0].blogs;
+                  console.log("prevBlogs = ", prevBlogs);
+            }
+      });
+
+      
+      User.updateOne({username : tempObj.username}, {$push : {blogs : newBlog}}, (err, docs) => {
+            if(err){
+                  console.log("Error");
+            }
+            else{
+                  console.log(docs);
+            }
+      });
+
+      res.redirect("/profile");
 });
 
 app.listen(3000,() => {
