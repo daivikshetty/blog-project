@@ -14,6 +14,10 @@
       </div>
       <div class="blogs">
             <h2>My Blogs</h2>
+            <% myBlogs.forEach(blog => { %>
+                  <h3><%= blog.title%></h3>
+                  <h4><%= blog.content%></h4>
+            <% }) %>
       </div>
       <div class="input">
             <h2>Write New Blog</h2>
@@ -29,6 +33,9 @@
                   </div>
             </form>
             
+      </div>
+      <div class="links">
+            <a href="/login">Log Out</a>
       </div>
 
 </body>

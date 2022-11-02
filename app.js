@@ -36,7 +36,8 @@ function renderProfilePage(searchUserName){
                         res.render("profile",
                         {
                               userName : foundUser4[0].username,
-                              mail : foundUser4[0].email
+                              mail : foundUser4[0].email,
+                              myBlogs : foundUser4[0].blogs
                         });
                   }
             });
@@ -73,7 +74,7 @@ app.post("/login",(req,res) => {
             password : req.body.password
       };
 
-      // console.log(details);
+      console.log(details);
 
       User.find({$or:
             [     
@@ -94,7 +95,8 @@ app.post("/login",(req,res) => {
                                     app.get("/profile", (req,res) => {        //can't access /profile unless logged in
                                           res.render("profile",{
                                                 userName : foundUser2[0].username,
-                                                mail : foundUser2[0].email
+                                                mail : foundUser2[0].email,
+                                                myBlogs : foundUser2[0].blogs
                                           });
                                     });
 
