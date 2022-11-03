@@ -8,5 +8,20 @@
 </head>
 <body>
       <h1>Home Page</h1>
+      <h2>Our Blogs</h2>
+
+      <div class="blog-all">
+            <% objects.forEach(object => { %>
+                  <%object.blogs.forEach(blog => { %>
+                        <div class="blog">
+                              <h3><%= blog.title%></h3>
+                              <i>~<%= object.username%></i>
+                              <p><%= blog.content%></p>
+                        </div>
+                        
+                  <%})  %>
+            <% }) %>
+      </div>
+      
 </body>
 </html>

@@ -44,9 +44,13 @@ function renderProfilePage(searchUserName){
       });
 }
 
+var allUsers;
 
 app.get("/",(req,res) => {
-      res.render("home");
+      User.find({}, (err, foundUser) => {
+            res.render("home", {objects : foundUser});
+      });
+
 });
 
 app.get("/about", (req, res) => {
