@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "\public")); 
 
 function renderProfilePage(searchUserName){
-      console.log(searchUserName);
+      console.log("Render Profile " + searchUserName);
       app.get("/profile", (req,res) => {        //can't access /profile unless logged in
             User.find({username : searchUserName}, (err, foundUser4) => {
                   if(err){
@@ -43,8 +43,6 @@ function renderProfilePage(searchUserName){
             });
       });
 }
-
-var allUsers;
 
 app.get("/",(req,res) => {
       User.find({}, (err, foundUser) => {
@@ -72,7 +70,7 @@ app.post("/",(req,res) => {
 var tempObj;
 
 app.post("/login",(req,res) => {
-      const details = {
+      var details = {
             userName : req.body.username,
             userMail : req.body.username,
             password : req.body.password
@@ -96,15 +94,15 @@ app.post("/login",(req,res) => {
                               if(foundUser2[0].password === details.password){
                                     console.log("Log in was successful!");
 
-                                    app.get("/profile", (req,res) => {        //can't access /profile unless logged in
-                                          res.render("profile",{
-                                                userName : foundUser2[0].username,
-                                                mail : foundUser2[0].email,
-                                                myBlogs : foundUser2[0].blogs
-                                          });
-                                    });
+                                    // app.get("/profile", (req,res) => {        //can't access /profile unless logged in
+                                    //       res.render("profile",{
+                                    //             userName : foundUser2[0].username,
+                                    //             mail : foundUser2[0].email,
+                                    //             myBlogs : foundUser2[0].blogs
+                                    //       });
+                                    // });
 
-                                    res.redirect("/profile");
+                                    res.redirect("/" + foundUser2[0].username);
                               }
                               else{
                                     console.log("Incorrect password!!!");
@@ -120,7 +118,7 @@ app.post("/login",(req,res) => {
 });
 
 app.post("/register",(req,res) => {
-      const credentials = {
+      var credentials = {
             userName : req.body.username,
             mailId : req.body.email,
             password : req.body.password,
@@ -141,12 +139,12 @@ app.post("/register",(req,res) => {
                               }
                               else{
                                     console.log("Account created!!");
-                                    const newUser = new User({username:credentials.userName,email:credentials.mailId,password:credentials.password});
+                                    var newUser = new User({username:credentials.userName,email:credentials.mailId,password:credentials.password});
                                     newUser.save();
 
-                                    const searchName = credentials.userName;
+                                    var searchName = credentials.userName;
                                     renderProfilePage(searchName);
-                                    res.redirect("/profile");
+                                    res.redirect("/" + credentials.userName);
                               }
                         }
                         else{
@@ -160,17 +158,35 @@ app.post("/register",(req,res) => {
       }
 });
 
-app.post("/profile", (req, res) => {
-      const newBlog = {
+app.get('/favicon.ico', (req, res) => res.status(204));                 //prevents browser from trying to render favicon.ico
+
+app.get("/:customProfile", function (req, res) {
+      console.log("Custom profile rendered!!!");
+      User.find({username : req.params.customProfile}, (err, foundUser6) => {
+            if(!err){
+                  console.log("Rendered " + req.params.customProfile);
+                  res.render("profile", {
+                        userName : foundUser6[0].username,
+                        mail : foundUser6[0].email,
+                        myBlogs : foundUser6[0].blogs
+                  });
+            }
+            else{
+                  console.log(err);
+            }
+      });
+});
+
+app.post("/:customProfile", (req, res) => {
+      var newBlog = {
             title : req.body.blogTitle,
             content : req.body.blogContent
       }
 
       var prevBlogs;
 
-      console.log("tempObj", tempObj);
 
-      User.find({username : tempObj.username}, (err, foundUser5) => {
+      User.find({username : req.params.customProfile}, (err, foundUser5) => {
             if(err){
                   console.log(err);
             }
@@ -179,20 +195,42 @@ app.post("/profile", (req, res) => {
                   console.log("foundUser5 = ", foundUser5[0]);
                   prevBlogs = foundUser5[0].blogs;
                   console.log("prevBlogs = ", prevBlogs);
+
+                  User.updateOne({username : req.params.customProfile}, {$push : {blogs : newBlog}}, (err, docs) => {
+                        if(err){
+                              console.log("Error");
+                        }
+                        else{
+                              console.log(docs);
+                        }
+                  });
+
+                  res.render("profile", {
+                        userName : foundUser5[0].username,
+                        mail : foundUser5[0].email,
+                        myBlogs : foundUser5[0].blogs
+                  });
             }
       });
 
-      
-      User.updateOne({username : tempObj.username}, {$push : {blogs : newBlog}}, (err, docs) => {
-            if(err){
-                  console.log("Error");
-            }
-            else{
-                  console.log(docs);
-            }
+      app.get("/" + req.params.customProfile, function (req, res) {
+            console.log("/" + foundUser2[0].username);
+            User.find({username : req.params.customProfile}, (err, foundUser6) => {
+                  if(err){
+                        console.log("Error found");
+                  }
+                  else{
+                        res.render("profile",
+                                          {
+                                                userName : foundUser6[0].username,
+                                                mail : foundUser6[0].email,
+                                                myBlogs : foundUser6[0].blogs
+                                          }
+                        );
+                        res.redirect("/" + foundUser6[0].username);
+                  }
+            });
       });
-
-      res.redirect("/profile");
 });
 
 app.listen(3000,() => {
