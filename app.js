@@ -89,18 +89,9 @@ app.post("/login",(req,res) => {
                               console.log("Username or Email doesn't exist");
                         }
                         else{
-                              // console.log(foundUser2[0]);
                               tempObj = foundUser2[0];
                               if(foundUser2[0].password === details.password){
                                     console.log("Log in was successful!");
-
-                                    // app.get("/profile", (req,res) => {        //can't access /profile unless logged in
-                                    //       res.render("profile",{
-                                    //             userName : foundUser2[0].username,
-                                    //             mail : foundUser2[0].email,
-                                    //             myBlogs : foundUser2[0].blogs
-                                    //       });
-                                    // });
 
                                     res.redirect("/" + foundUser2[0].username);
                               }
@@ -143,7 +134,6 @@ app.post("/register",(req,res) => {
                                     newUser.save();
 
                                     var searchName = credentials.userName;
-                                    renderProfilePage(searchName);
                                     res.redirect("/" + credentials.userName);
                               }
                         }
@@ -159,12 +149,14 @@ app.post("/register",(req,res) => {
 });
 
 app.get('/favicon.ico', (req, res) => res.status(204));                 //prevents browser from trying to render favicon.ico
+app.get('/index.js', (req, res) => res.status(204));
 
 app.get("/:customProfile", function (req, res) {
-      console.log("Custom profile rendered!!!");
+      
       User.find({username : req.params.customProfile}, (err, foundUser6) => {
             if(!err){
                   console.log("Rendered " + req.params.customProfile);
+                  console.log(foundUser6[0]);
                   res.render("profile", {
                         userName : foundUser6[0].username,
                         mail : foundUser6[0].email,
