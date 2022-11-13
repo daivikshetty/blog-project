@@ -24,31 +24,10 @@ app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "\public")); 
 
-function renderProfilePage(searchUserName){
-      console.log("Render Profile " + searchUserName);
-      app.get("/profile", (req,res) => {        //can't access /profile unless logged in
-            User.find({username : searchUserName}, (err, foundUser4) => {
-                  if(err){
-                        console.log(err);
-                  }
-                  else{
-                        console.log(foundUser4[0]);
-                        res.render("profile",
-                        {
-                              userName : foundUser4[0].username,
-                              mail : foundUser4[0].email,
-                              myBlogs : foundUser4[0].blogs
-                        });
-                  }
-            });
-      });
-}
-
 app.get("/",(req,res) => {
       User.find({}, (err, foundUser) => {
             res.render("home", {objects : foundUser});
       });
-
 });
 
 app.get("/about", (req, res) => {
@@ -66,8 +45,6 @@ app.get("/register",(req,res) => {
 app.post("/",(req,res) => {
       console.log("Up and running...");
 });
-
-var tempObj;
 
 app.post("/login",(req,res) => {
       var details = {
@@ -155,13 +132,19 @@ app.get("/:customProfile", function (req, res) {
       
       User.find({username : req.params.customProfile}, (err, foundUser6) => {
             if(!err){
-                  console.log("Rendered " + req.params.customProfile);
-                  console.log(foundUser6[0]);
-                  res.render("profile", {
-                        userName : foundUser6[0].username,
-                        mail : foundUser6[0].email,
-                        myBlogs : foundUser6[0].blogs
-                  });
+                  if(foundUser6.length !== 0){
+                        console.log("Rendered " + req.params.customProfile);
+                        console.log(foundUser6[0]);
+                        res.render("profile", {
+                              userName : foundUser6[0].username,
+                              mail : foundUser6[0].email,
+                              myBlogs : foundUser6[0].blogs
+                        });
+                  }
+                  else{
+                        res.redirect("/");
+                  }
+                  
             }
             else{
                   console.log(err);
@@ -169,7 +152,30 @@ app.get("/:customProfile", function (req, res) {
       });
 });
 
-app.post("/:customProfile", (req, res) => {
+app.get("/:customProfile/edit", (req, res) => {
+      User.find({username : req.params.customProfile}, (err, foundUser6) => {
+            if(!err){
+                  if(foundUser6.length !== 0){
+                        console.log("Rendered Edit Page for " + req.params.customProfile);
+                        console.log(foundUser6[0]);
+                        res.render("edit", {
+                              userName : foundUser6[0].username,
+                              mail : foundUser6[0].email,
+                              myBlogs : foundUser6[0].blogs
+                        });
+                  }
+                  else{
+                        res.redirect("/");
+                  }
+                  
+            }
+            else{
+                  console.log(err);
+            }
+      });
+})
+
+app.post("/:customProfile/edit", (req, res) => {
       var newBlog = {
             title : req.body.blogTitle,
             content : req.body.blogContent

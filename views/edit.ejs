@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Edit Profile</title>
+</head>
+<body>
+      <div class="input">
+            <h2>Edit Profile</h2>
+            <div class="passed">
+                  <h3>Username : <%=userName%></h3>
+            </div>
+            <form method="post">
+                  <div>
+                        <input type="text" name="blogTitle" placeholder="Title" required>
+                  </div>
+                  <div>
+                        <input type="text" name="blogContent" placeholder="Content" style="width: 500px;height: 50px;" required>
+                  </div>
+                  <div>
+                        <input type="submit" value="Submit">
+                  </div>
+            </form>
+      </div>
+      <div class="links">
+            <a href="/<%=userName%>" >My Profile</a>
+            <a href="/login">Log Out</a>
+      </div>
+</body>
+</html>
