@@ -129,7 +129,6 @@ app.get('/favicon.ico', (req, res) => res.status(204));                 //preven
 app.get('/index.js', (req, res) => res.status(204));
 
 app.get("/:customProfile", function (req, res) {
-      
       User.find({username : req.params.customProfile}, (err, foundUser6) => {
             if(!err){
                   if(foundUser6.length !== 0){
@@ -142,7 +141,7 @@ app.get("/:customProfile", function (req, res) {
                         });
                   }
                   else{
-                        res.redirect("/");
+                        res.render("notfound");
                   }
                   
             }
