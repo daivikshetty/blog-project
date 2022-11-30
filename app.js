@@ -22,7 +22,7 @@ const app = express();
 
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static(__dirname + "\public")); 
+app.use(express.static("./public/styles.css")); 
 
 app.get("/",(req,res) => {
       User.find({}, (err, foundUser) => {
@@ -172,7 +172,11 @@ app.get("/:customProfile/edit", (req, res) => {
                   console.log(err);
             }
       });
-})
+});
+
+app.get("/:customProfile/:somethingRandom", (req, res) => {
+      res.render("notfound");
+});
 
 app.post("/:customProfile/edit", (req, res) => {
       var newBlog = {
@@ -180,28 +184,24 @@ app.post("/:customProfile/edit", (req, res) => {
             content : req.body.blogContent
       }
 
-      var prevBlogs;
-
+      User.updateOne({username : req.params.customProfile}, {$push : {blogs : newBlog}}, (err, docs) => {
+                              if(err){
+                                    console.log("Error");
+                              }
+                              else{
+                                    newBlog = null;
+                                    console.log("newBlog = ",newBlog);
+                                    console.log(docs);
+                                    res.redirect("/" + req.params.customProfile);
+                              }
+      });
 
       User.find({username : req.params.customProfile}, (err, foundUser5) => {
             if(err){
                   console.log(err);
             }
             else{
-                  // console.log("newBlog = ", newBlog);
-                  console.log("foundUser5 = ", foundUser5[0]);
-                  prevBlogs = foundUser5[0].blogs;
-                  console.log("prevBlogs = ", prevBlogs);
-
-                  User.updateOne({username : req.params.customProfile}, {$push : {blogs : newBlog}}, (err, docs) => {
-                        if(err){
-                              console.log("Error");
-                        }
-                        else{
-                              console.log(docs);
-                        }
-                  });
-
+                  console.log(foundUser5[0].username);
                   res.render("profile", {
                         userName : foundUser5[0].username,
                         mail : foundUser5[0].email,
