@@ -21,7 +21,9 @@
 }
 .lhead{
     min-height: 100vh;
-    background:url(2017-05-31-22-49-50.jpg) no-repeat;
+    background:url(../images/2017-05-31-22-49-50.jpg) no-repeat;
+    background-color: grey;
+    background-blend-mode: multiply;
     background-size: cover;
     background-position: center;
     text-align:center;
@@ -32,7 +34,7 @@
 /* ABOUT PAGE */
 .head{
     min-height: 100vh;
-    background:url(2017-05-31-22-49-50.jpg) no-repeat;
+    background:url(../images/2017-05-31-22-49-50.jpg) no-repeat;
     background-size: cover;
     background-position: center;
     text-align:center;
@@ -102,4 +104,63 @@ a:hover{
 }
 #rsubmit{
     padding: 5px 10px 5px 10px;
+}
+/* HOME */
+.blog-all{
+    min-height: 100vh;
+    background:url(../images/2017-05-31-22-49-50.jpg) no-repeat;
+    background-color: grey;
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center;
+    text-align:center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: whitesmoke;
+}
+.header{
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter:blur(10px);
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    padding: 2rem 7%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+.header .logo{
+    height: 4rem;
+    width: auto;
+}
+.header .navbar a{
+    font-size: 1.5rem;
+    color: whitesmoke;
+    padding:1rem;
+}
+.header .navbar a:hover{
+    color: grey;
+    border-bottom:0.1rem solid grey;
+    padding-bottom: 0.5rem;
+}
+.header .icons {
+    color: whitesmoke;
+    cursor: pointer;
+    font-size: 2rem;
+    margin-left: 2rem;
+}
+.header .icons div:hover{
+    color: grey;
+}
+#menu-btn{
+    display: none;
+}
+.dark-mode{
+  filter: invert(1);
+}
+.invert{
+  filter: invert(1);
 }
