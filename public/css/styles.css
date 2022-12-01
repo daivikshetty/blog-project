@@ -164,3 +164,23 @@ a:hover{
 .invert{
   filter: invert(1);
 }
+.blog{
+    padding: 20px;
+    width: 100vw;
+    display: inline-block;
+}
+#title{
+    text-align: left;
+    padding: 5px;
+}
+#name{
+    margin-left: 10px;
+}
+#content{
+    text-align: left;
+    padding: 5px;
+}
+.content h1{
+    font-size: 3rem;
+}
+

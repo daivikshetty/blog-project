@@ -27,14 +27,14 @@
             </div>
         </header>
         <div class="content">
-        <h1>Home Page</h1>
-        <h2>Our Blogs</h2>
+        <h1>All Blogs</h1>
                         <% objects.forEach(object => { %>
                             <%object.blogs.forEach(blog => { %>
                                   <div class="blog">
-                                        <h3><%= blog.title%></h3>
-                                        <i>~<%= object.username%></i>
-                                        <p><%= blog.content%></p>
+                                    <div class="titname">
+                                        <h3 id="title"><%= blog.title%><i id="name">~<%= object.username%></i></h3>
+                                    </div>
+                                        <p id="content"><%= blog.content%></p>
                                   </div>
                             <%})  %>
                       <% }) %>
