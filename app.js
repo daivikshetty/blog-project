@@ -164,7 +164,7 @@ app.get("/:customProfile/edit", (req, res) => {
                         });
                   }
                   else{
-                        res.redirect("/");
+                        res.redirect("/" + req.params.customProfile);
                   }
                   
             }
@@ -192,7 +192,7 @@ app.post("/:customProfile/edit", (req, res) => {
                                     newBlog = null;
                                     console.log("newBlog = ",newBlog);
                                     console.log(docs);
-                                    res.redirect("/" + req.params.customProfile);
+                                    return res.redirect("/" + req.params.customProfile);
                               }
       });
 
@@ -210,24 +210,24 @@ app.post("/:customProfile/edit", (req, res) => {
             }
       });
 
-      app.get("/" + req.params.customProfile, function (req, res) {
-            console.log("/" + foundUser2[0].username);
-            User.find({username : req.params.customProfile}, (err, foundUser6) => {
-                  if(err){
-                        console.log("Error found");
-                  }
-                  else{
-                        res.render("profile",
-                                          {
-                                                userName : foundUser6[0].username,
-                                                mail : foundUser6[0].email,
-                                                myBlogs : foundUser6[0].blogs
-                                          }
-                        );
-                        res.redirect("/" + foundUser6[0].username);
-                  }
-            });
-      });
+      // app.get("/" + req.params.customProfile, function (req, res) {
+      //       console.log("/" + foundUser2[0].username);
+      //       User.find({username : req.params.customProfile}, (err, foundUser6) => {
+      //             if(err){
+      //                   console.log("Error found");
+      //             }
+      //             else{
+      //                   res.render("profile",
+      //                                     {
+      //                                           userName : foundUser6[0].username,
+      //                                           mail : foundUser6[0].email,
+      //                                           myBlogs : foundUser6[0].blogs
+      //                                     }
+      //                   );
+      //                   res.redirect("/" + foundUser6[0].username);
+      //             }
+      //       });
+      // });
 });
 
 app.listen(3000,() => {
