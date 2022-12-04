@@ -193,7 +193,7 @@ a{
     color: whitesmoke;
 }
 a:hover{
-    color: whitesmoke;
+    /* color: whitesmoke; */
     border-bottom:0.1rem solid grey;
     padding-bottom: 0.5rem;
 }
