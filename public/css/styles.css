@@ -4,20 +4,104 @@
     box-sizing: border-box;
     font-family: 'Arvo', serif;
 }
+
+/* HOME */
+
+.header{
+    background: url(../images/2017-05-31-22-49-50.jpg);
+    backdrop-filter:blur(10px);
+    background-position: center;
+    background-color:rgb(75, 74, 74);
+    background-blend-mode: multiply;
+    backdrop-filter:blur(10px);
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    padding:1.5rem 7%;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+.header .logo{
+    height: 4rem;
+    width: 4rem;
+}
+.header .navbar a{
+    font-size: 1.3rem;
+    color: whitesmoke;
+    padding:1rem;
+}
+.header .navbar a:hover{
+    color: grey;
+    border-bottom:0.1rem solid grey;
+    padding-bottom: 0.5rem;
+}
+.header .icons {
+    color: whitesmoke;
+    cursor: pointer;
+    font-size: 2rem;
+    margin-left: 2rem;
+}
+.header .icons div:hover{
+    color: grey;
+}
+#menu-btn{
+    display: none;
+}
+.dark-mode{
+  filter: invert(1);
+}
+.invert{
+  filter: invert(1);
+}
+.blog-all{
+    min-height: 100vh;
+    background:url(../images/2017-05-31-22-49-50.jpg) no-repeat;
+    background-color: grey;
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center;
+    text-align:center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: whitesmoke;
+}
+.blog{
+    padding: 20px;
+    width: 100vw;
+    display: inline-block;
+}
+#title{
+    text-align: left;
+    padding: 5px;
+}
+#name{
+    margin-left: 10px;
+}
+#content{
+    text-align: left;
+    padding: 5px;
+}
+.content h1{
+    font-size: 3rem;
+}
 /* LOGIN PAGE */
 
 .login{
-    padding: 50px;
+    padding: 40px;
     width: 500px;
     height: 500px;
     display: flex;
-    background: rgba(0,0,0,0.1);
+    background: rgba(0,0,0,0.5);
     backdrop-filter:blur(10px);
     color: white;
     border-radius: 50px;
     box-shadow:0px 0px 16px 0px rgba(0,0,0,0.5);
     text-align:center;
     justify-content: center;
+    margin-top: 30px
 }
 .lhead{
     min-height: 100vh;
@@ -31,35 +115,63 @@
     align-items: center;
     justify-content: center;
 }
-/* ABOUT PAGE */
-.head{
-    min-height: 100vh;
-    background:url(../images/2017-05-31-22-49-50.jpg) no-repeat;
-    background-size: cover;
-    background-position: center;
-    text-align:center;
-}
-.abo{
-    padding: 50px;
-    width: 400px;
-    height: 500px;
-    background: rgba(0,0,0,0.1);
-    backdrop-filter:blur(10px);
-    color: white;
-    border-radius: 50px;
-   box-shadow:0px 0px 16px 0px rgba(0,0,0,0.5);
-    text-align:center;
-    margin: 0px 40px 40px 40px;
-}
-.about{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.header .logol{
+   margin: 3px auto;
+   height: 4rem;
+   width: auto;
 }
 input{
     border-radius: 5px;
     margin: 30px;
 }
+/* ABOUT PAGE */
+.head-about{
+        height: 100vh;
+        background:url(../images/2017-05-31-22-49-50.jpg) no-repeat;
+        background-color: grey;
+        background-blend-mode:multiply;
+        background-size: cover;
+        background-position: center;
+        text-align:center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: whitesmoke;
+}
+.head{
+    height: 100vh;
+    background:url(../images/2017-05-31-22-49-50.jpg) no-repeat;
+    background-color: grey;
+    background-blend-mode:multiply;
+    background-size: cover;
+    background-position: center;
+    text-align:center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.head .about{
+    text-align: center;
+    width: 100%;
+}
+.about-content li{
+    color: whitesmoke;
+    list-style: none;
+    padding: 10px;
+    font-size: 1rem;
+}
+.ic{
+    background: rgba(0,0,0,0.5);
+      backdrop-filter:blur(10px);
+      color: white;
+      border-radius: 50px;
+     box-shadow:0px 0px 16px 0px rgba(0,0,0,0.5);
+      text-align:center;
+      width: 300px;
+    height: 500px;
+    padding: 30px;
+    padding-bottom: 30px;
+ }
 .links{
     display: flex;
     justify-content: space-between;
@@ -94,93 +206,42 @@ a:hover{
     width: 500px;
     height: 600px;
     display: flex;
-   background: rgba(0,0,0,0.1);
+   background: rgba(0,0,0,0.5);
     backdrop-filter:blur(10px);
     color: white;
     border-radius: 50px;
    box-shadow:0px 0px 16px 0px rgba(0,0,0,0.5);
     text-align:center;
     justify-content: center;
+    margin-top: 50px;
 }
 #rsubmit{
     padding: 5px 10px 5px 10px;
 }
-/* HOME */
-.blog-all{
-    min-height: 100vh;
-    background:url(../images/2017-05-31-22-49-50.jpg) no-repeat;
-    background-color: grey;
-    background-blend-mode: multiply;
-    background-size: cover;
-    background-position: center;
-    text-align:center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: whitesmoke;
-}
-.header{
-    background: rgba(0, 0, 0, 0.1);
-    backdrop-filter:blur(10px);
-    display: flex;
-    align-items:center;
-    justify-content: space-between;
-    padding: 2rem 7%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-}
-.header .logo{
-    height: 4rem;
-    width: auto;
-}
-.header .navbar a{
-    font-size: 1.5rem;
-    color: whitesmoke;
-    padding:1rem;
-}
-.header .navbar a:hover{
-    color: grey;
-    border-bottom:0.1rem solid grey;
-    padding-bottom: 0.5rem;
-}
-.header .icons {
-    color: whitesmoke;
-    cursor: pointer;
-    font-size: 2rem;
-    margin-left: 2rem;
-}
-.header .icons div:hover{
-    color: grey;
-}
-#menu-btn{
-    display: none;
-}
-.dark-mode{
-  filter: invert(1);
-}
-.invert{
-  filter: invert(1);
-}
-.blog{
-    padding: 20px;
-    width: 100vw;
-    display: inline-block;
-}
-#title{
-    text-align: left;
-    padding: 5px;
-}
-#name{
-    margin-left: 10px;
-}
-#content{
-    text-align: left;
-    padding: 5px;
-}
-.content h1{
-    font-size: 3rem;
-}
 
+@media only screen and (max-width:800px){
+    .header{
+        padding: 1.5rem 2rem;
+    } 
+    .header .navbar{
+        position: absolute;
+        top:100%;
+        right:-100%;
+        background: whitesmoke;
+        height: 100vh;
+    }
+    .header.navbar.active{
+        right:0%;
+        /* background: whitesmoke; */
+    }
+    .header .navbar a{
+        display: block;
+        color: black;
+        margin: 1.5rem;
+        padding: 0.5rem;
+        font-size: 2rem;
+    }
+    #menu-btn{
+        display: inline-block;
+    }
+}
