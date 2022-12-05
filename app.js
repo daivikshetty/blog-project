@@ -4,8 +4,10 @@ const ejs = require('ejs');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const otp = require('./otp.js');
+const config = require('./config')
 
-mongoose.connect('mongodb://localhost:27017/test');
+
+mongoose.connect('mongodb+srv://daivik_shetty:todotodotodo123098@cluster001.1hocejh.mongodb.net/blogsDB');
 
 const userSchema = new mongoose.Schema({
       username : String,
