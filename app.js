@@ -7,7 +7,7 @@ const otp = require('./otp.js');
 const config = require('./config')
 
 
-mongoose.connect('mongodb+srv://daivik_shetty:todotodotodo123098@cluster001.1hocejh.mongodb.net/blogsDB');
+mongoose.connect('mongodb+srv://daivik_shetty:' + config.mongoPassword + '@cluster001.1hocejh.mongodb.net/blogsDB');
 
 const userSchema = new mongoose.Schema({
       username : String,
