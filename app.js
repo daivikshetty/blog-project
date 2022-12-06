@@ -7,7 +7,7 @@ const otp = require('./otp.js');
 const dotenv = require('dotenv').config()
 
 
-mongoose.connect('mongodb+srv://daivik_shetty:' + process.env.mongoPassword + '@cluster001.1hocejh.mongodb.net/blogsDB');
+mongoose.connect('mongodb+srv://jeevottam_bhat:' + process.env.mongoPassword + '@cluster001.1hocejh.mongodb.net/blogsDB');
 
 const userSchema = new mongoose.Schema({
       username : String,
@@ -28,6 +28,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + "/public")); 
 
 app.get("/",(req,res) => {
+      // console.log(config.mongoPassword);
       User.find({}, (err, foundUser) => {
             res.render("home", {objects : foundUser});
       });
