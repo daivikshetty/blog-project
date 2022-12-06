@@ -7,7 +7,7 @@ const otp = require('./otp.js');
 const dotenv = require('dotenv').config()
 
 
-mongoose.connect('mongodb+srv://jeevottam_bhat:' + process.env.mongoPassword + '@cluster001.1hocejh.mongodb.net/blogsDB');
+mongoose.connect('mongodb+srv://'+ process.env.mongoUsername +':' + process.env.mongoPassword + '@cluster001.1hocejh.mongodb.net/blogsDB');
 
 const userSchema = new mongoose.Schema({
       username : String,
