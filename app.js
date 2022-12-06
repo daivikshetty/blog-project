@@ -4,10 +4,10 @@ const ejs = require('ejs');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const otp = require('./otp.js');
-const config = require('./config')
+const dotenv = require('dotenv').config()
 
 
-mongoose.connect('mongodb+srv://daivik_shetty:' + config.mongoPassword + '@cluster001.1hocejh.mongodb.net/blogsDB');
+mongoose.connect('mongodb+srv://daivik_shetty:' + process.env.mongoPassword + '@cluster001.1hocejh.mongodb.net/blogsDB');
 
 const userSchema = new mongoose.Schema({
       username : String,
