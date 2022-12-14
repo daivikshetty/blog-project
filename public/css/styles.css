@@ -316,6 +316,9 @@ a:hover{
 .info h1,h3,h4{
     padding: 10px;
 }
+.profile-home img{
+    margin: 10px;
+}
 .profile-home .links{
     margin: 15px auto;
     width: 200px;
@@ -360,7 +363,23 @@ a:hover{
 .profile-blogs .blog{
     padding: 20px;
 }
-    /* EDIT */
+/* FOOTER */
+.footer{
+    height: 100%;
+    background:url(../images/justback.1jpg.jpg) no-repeat;
+    background-color:rgb(78, 76, 76);
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center;
+    color: whitesmoke;
+    text-align: center;
+    padding: 5px;
+}
+.footer span{
+    text-decoration: none;
+}
+/* FOOTER */
+/* EDIT */
 @media only screen and (max-width:800px){
     .header{
         padding: 1.5rem 2rem;

@@ -22,10 +22,10 @@
               </div>
               </header>
               <div class="info">
-                  <h1>User Profile</h1>
+                  <h1><%=userName%></h1>
                   <img src="../images/pfp.jpg" alt="">
-                  <h3>Username : <%= userName%></h3>
                   <h3>Email : <%= mail%></h3>
+
             </div>
             <div class="links">
                   <a href="/<%=userName%>/edit"><button id="edit">New Blog</button></a> 
@@ -44,6 +44,10 @@
                   </div>
             <% }) %>
             </div>
+      </div>
+      <!-- FOOTER -->
+     <div class="footer">
+      <h3>Made With <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><span style="color:red"> ♥ </span></a></h3>
       </div>
 </body>
 </html>
