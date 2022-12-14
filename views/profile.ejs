@@ -8,23 +8,42 @@
       <title>Blogspot</title>
 </head>
 <body> 
-      <div class="info">
-            <h1>User Profile</h1>
-            <h3>Username : <%= userName%></h3>
-            <h3>Email : <%= mail%></h3>
+      <div class="profile-home">
+            <header class="header">
+                  <img class="logo" src="../images/logo1.png" alt="">
+              <nav class="navbar">
+                  <a href="/">Home</a>
+                  <a href="/login">Login</a>
+                  <a href="/register">Register</a>
+                  <a href="/about">About Us</a>
+              </nav>
+              <div class="icons">
+                  <div class="fas fa-bars" id="menu-btn"></div>
+              </div>
+              </header>
+              <div class="info">
+                  <h1>User Profile</h1>
+                  <img src="../images/pfp.jpg" alt="">
+                  <h3>Username : <%= userName%></h3>
+                  <h3>Email : <%= mail%></h3>
+            </div>
+            <div class="links">
+                  <a href="/<%=userName%>/edit"><button id="edit">New Blog</button></a> 
+                  <a href="/login"><button>Log Out</button></a> 
+            </div>
       </div>
-      <div class="blogs">
-            <h2>My Blogs</h2>
+      <div class="profile-blogs">
+            <div class="content">
+            <h1>My Blogs</h1>
             <% myBlogs.forEach(blog => { %>
-                  <h3><%= blog.title%></h3>
-                  <h4><%= blog.content%></h4>
+                  <div class="blog">
+                        <div class="titname">
+                               <h3 id="title"><%= blog.title%></h3>
+                        </div>     
+                  <h4 id="content"><%= blog.content%></h4>
+                  </div>
             <% }) %>
+            </div>
       </div>
-      <div class="link">
-            <a href="/<%=userName%>/edit">Edit Profile</a>
-            <a href="/login">Log Out</a>
-            <a href="/">Home</a>
-      </div>
-
 </body>
 </html>

@@ -19,14 +19,23 @@
     <div class="home">
         <header class="header">
             <img class="logo" src="../images/logo1.png" alt="">
-        <nav class="navbar">
+        <nav class="navbar" id="navs">
             <a href="/login">Login</a>
             <a href="/register">Register</a>
-            <a href="#home">About Us</a>
-            <a href="#feedback">Feedback</a>
+            <a href="/about">About Us</a>
+            <!-- <a href="#feedback">Feedback</a> -->
         </nav>
-        <div class="icons">
-            <div class="fas fa-bars" id="menu-btn"></div>
+        <div class="icons"  onclick="click()">
+            <div class="fas fa-bars" id="menu-btn" onclick="click()"></div>
+            <script>
+                let navbar = document.getElementById('navs');
+                    console.log(navbar);
+                   function click(){
+                    navbar.classList.toggle('active');
+                    console.log("clikcs");
+                   }
+        
+            </script>
         </div>
         </header>
         <h1>JD BLOGS</h1>
@@ -37,13 +46,36 @@
                 <h3>Where Skill Meets Technology</h3>        
             </div>
             <div class="col">
-                <img src="../images/Untitled design (2).png" alt="" srcset="" id="pen">
+                <img src="../images/Untitled design (2).png" alt="" srcset="" onclick="click()" id="pen">
             </div>
             <div class="col">
                 <h3>Minimal Steps To Get Your Work Done</h3>
                 <h3>Also Maintain a Secret Personal Diary</h3>
                 <h3>Where Your Heart Meets A Place</h3>
             </div>
+        </div>
+    </div>
+    <div class="second-container">
+        <h1>Why Blogs???</h1>
+        <div class="row">
+            <div class="col">
+                <h3>Blogs give you various topics to share,talk and discuss about on your social media channel .</h3>
+                <h4>-To All The Extroverts</h4>
+            </div>
+            <div class="col">
+                <h3>Blogs gives you a platform to voice your opninions,critics without any interaction with people.</h3>
+                <h4>-To All The Introverts</h4>
+            </div>
+            <div class="col">
+                <h3>Blogs creates content and also a medium through which a lot of day-to-day problems are solved.</h3>
+                <h4>-To Everyone</h4>
+            </div>
+        </div>
+        <div class="row">
+             <div class="col boo">
+                <h3>So What Are You Waiting For, Create an Account and Get BLOGGING!!!</h3>
+                <img src="../images/aaron-burden-pCfJKUB5bes-unsplash-removebg-preview.png" alt="" id="col-img">
+             </div>
         </div>
     </div>
     <div class="blog-all">
@@ -61,8 +93,6 @@
                       <% }) %>
         </div>
     </div>
-    <script>
-        
-    </script>
+    
 </body>
 </html>

@@ -1,8 +1,13 @@
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Roboto:wght@400;700&display=swap');
+@font-face {
+    font-family: myFont;
+    src: url(../css/BasementGrotesque-Black_v1.202.otf);
+}
 *{
     margin:0;
     padding:0;
     box-sizing: border-box;
-    font-family: 'Arvo', serif;
+    font-family: myFont;
 }
 
 /* HOME */
@@ -73,7 +78,7 @@
   }
   .col{
     text-align: center;
-    flex-basis: 33%;
+    flex-basis: 33.33%;
     padding: 10px;
     height: 100%;
   }
@@ -90,13 +95,36 @@
     margin-top: 10px;
     height: 200px;
 }
-.blog-all{
-    min-height: 100vh;
+.second-container{
+    height: 100%;
     background:url(../images/justback.1jpg.jpg) no-repeat;
     background-color:rgb(56, 55, 55);
     background-blend-mode: multiply;
     background-size: cover;
     background-position: center;
+    text-align: center;
+    color: whitesmoke;
+}
+.second-container h1{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-size: 3rem;
+}
+.boo{
+    flex-basis: 100%;
+    text-align: center;
+}
+#col-img{
+    height: 300px;
+    width: 300px
+}
+.boo h3{
+    margin-bottom: 0px;
+    padding-top: 20px;
+}
+.blog-all{
+    min-height: 100vh;
+    background-color: black;
     text-align:center;
     display: flex;
     align-items: center;
@@ -219,6 +247,7 @@ input{
 .links{
     display: flex;
     justify-content: space-between;
+    color: whitesmoke;
 }
 .ab{
     height: 100px;
@@ -246,8 +275,8 @@ a:hover{
 }
 /* Register */
 .register{
-    width: 500px;
-    height: 550px;
+    width: 450px;
+    height: 500px;
     display: flex;
    background: rgba(0,0,0,0.5);
     backdrop-filter:blur(10px);
@@ -262,7 +291,76 @@ a:hover{
 #rsubmit{
     padding: 5px 10px 5px 10px;
 }
-
+.register .input{
+    margin: 20px;
+}
+/* PROFILE */
+.profile-home{
+    height: 100vh;
+    background: url(../images/aaron-burden-pCfJKUB5bes-unsplash.jpg);
+    background-color: rgb(49, 48, 48);
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center;
+    color: whitesmoke;
+    text-align: center;
+    padding: 20px;
+}
+.info{
+    padding: 20px;
+}
+.info img{
+    height: 200px;
+    border-radius: 50%;
+}
+.info h1,h3,h4{
+    padding: 10px;
+}
+.profile-home .links{
+    margin: 15px auto;
+    width: 200px;
+}
+.profile-home .links button,a{
+    cursor:pointer; 
+    text-decoration: none;
+}
+.links button{
+    padding: 5px;
+}
+.profile-blogs{
+    height: 100%;
+    background:url(../images/justback.1jpg.jpg) no-repeat;
+    background-color:rgb(56, 55, 55);
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center;
+    color: whitesmoke;
+    text-align: center;
+    padding: 20px;
+}
+/* PROFILE*/
+/* EDIT */
+.edit-input{
+    height: 100vh;
+    background: url(../images/aaron-burden-pCfJKUB5bes-unsplash.jpg);
+    background-color: rgb(49, 48, 48);
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center;
+    color: whitesmoke;
+    text-align: center;
+    padding: 20px;
+}
+a:hover{
+    color: whitesmoke;
+}
+.profile-blogs h1{
+    padding: 20px;
+}
+.profile-blogs .blog{
+    padding: 20px;
+}
+    /* EDIT */
 @media only screen and (max-width:800px){
     .header{
         padding: 1.5rem 2rem;
