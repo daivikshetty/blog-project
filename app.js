@@ -39,7 +39,13 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/login",(req,res) => {
-      res.render("login")
+      res.render("login");
+      let imgClick = document.querySelector('img.logol');
+      if(imgClick){
+            imgClick.addEventListener('click',(ev) => {
+                  console.log("Img was clicked");
+            })
+      }
 });
 
 app.get("/register",(req,res) => {
