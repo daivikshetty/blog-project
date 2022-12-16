@@ -4,10 +4,13 @@ const ejs = require('ejs');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const otp = require('./otp.js');
-const dotenv = require('dotenv').config()
+const dotenv = require('dotenv').config();
+const bcrypt = require('bcrypt');
 
 
-mongoose.connect('mongodb+srv://'+ "jeevottam_bhat" +':' + "jeevu06" + '@cluster001.1hocejh.mongodb.net/blogsDB',()=>{console.log("Connected.")});
+// mongoose.connect('mongodb+srv://'+ "jeevottam_bhat" +':' + "jeevu06" + '@cluster001.1hocejh.mongodb.net/blogsDB',()=>{console.log("Connected.")});
+
+mongoose.connect('mongodb://localhost:27017/test');
 
 const userSchema = new mongoose.Schema({
       username : String,
@@ -39,7 +42,13 @@ app.get("/about", (req, res) => {
 });
 
 app.get("/login",(req,res) => {
-      res.render("login")
+      res.render("login");
+      let imgClick = document.querySelector('img.logol');
+      if(imgClick){
+            imgClick.addEventListener('click',(ev) => {
+                  console.log("Img was clicked");
+            })
+      }
 });
 
 app.get("/register",(req,res) => {
