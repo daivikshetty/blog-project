@@ -8,9 +8,9 @@ const dotenv = require('dotenv').config();
 const bcrypt = require('bcrypt');
 
 
-// mongoose.connect('mongodb+srv://'+ "jeevottam_bhat" +':' + "jeevu06" + '@cluster001.1hocejh.mongodb.net/blogsDB',()=>{console.log("Connected.")});
+mongoose.connect('mongodb+srv://'+ "jeevottam_bhat" +':' + "jeevu06" + '@cluster001.1hocejh.mongodb.net/blogsDB',()=>{console.log("Connected.")});
 
-mongoose.connect('mongodb://localhost:27017/test');
+// mongoose.connect('mongodb://localhost:27017/test');
 
 const userSchema = new mongoose.Schema({
       username : String,
@@ -230,12 +230,15 @@ app.post("/:customProfile/edit", (req, res) => {
             }
             else{
                   console.log(foundUser5[0].username);
+                  res.redirect("/"+req.params.customProfile);
                   res.render("profile", {
                         userName : foundUser5[0].username,
                         mail : foundUser5[0].email,
                         myBlogs : foundUser5[0].blogs
                   });
+                  // res.redirect("/"+req.params.customProfile);
             }
+            
       });
 
       // app.get("/" + req.params.customProfile, function (req, res) {
